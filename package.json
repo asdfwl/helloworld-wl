@@ -1,0 +1,11 @@
+{
+  "name": "hello-world-website",
+  "version": "1.0.0",
+  "description": "我的第一个 AI 开发的网站：显示欢迎语和当前服务器时间",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "王淋",
+  "license": "MIT"
+}
