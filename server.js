@@ -15,12 +15,14 @@ const PORT = 3000;          // 服务端口，可按需修改
 const HOST = '127.0.0.1';   // 监听本机回环地址，避免 Windows 防火墙弹窗
 const INDEX_FILE = path.join(__dirname, 'public', 'index.html'); // 首页文件路径
 
-// 把日期格式化为 "YYYY-MM-DD HH:mm:ss"（24 小时制）
+// 把日期格式化为 "YYYY-MM-DD HH:mm:ss"（北京时间，UTC+8，24 小时制）
+// 做法：先把时间戳加 8 小时，再取 UTC 值，这样即使服务器在 UTC 时区（如 Vercel），显示的也是北京时间
 function formatTime(date) {
   const pad = (n) => String(n).padStart(2, '0');
+  const beijing = new Date(date.getTime() + 8 * 60 * 60 * 1000);
   return (
-    `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ` +
-    `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`
+    `${beijing.getUTCFullYear()}-${pad(beijing.getUTCMonth() + 1)}-${pad(beijing.getUTCDate())} ` +
+    `${pad(beijing.getUTCHours())}:${pad(beijing.getUTCMinutes())}:${pad(beijing.getUTCSeconds())}`
   );
 }
 
